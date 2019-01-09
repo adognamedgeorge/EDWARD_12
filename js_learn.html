@@ -3,8 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <title>js_learn_2019_1_9</title>
+    <script>
+        // Date()
+        function displayDate () {
+            document.getElementById('date').innerHTML = Date();
+            // document.write('<h1>1233</h1>');您只能在 HTML 输出流中使用 document.write。
+            // 如果您在文档已加载后使用它（比如在函数中），会覆盖整个文档。
+        };
+        // element.src.match()
+        function changeImg () {
+            element = document.getElementById('myImage');
+            if (element.src.match('bulboff')) {
+                element.src = './img/pic_bulbon.gif'
+            } else {
+                element.src = './img/pic_bulboff.gif'
+            }
+        };
+        function changeStyle () {
+            p_demo =document.getElementById('p_demo');
+            p_demo.style.color = '#ff0000';
+        }
+    </script>
 </head>
 <body>
-    <div>123</div>
+    <!--标题开始-->
+    <div style="background-color: pink">
+        <p>1. Date()</p>
+        <p>2. document.write('')</p>
+        <p>3. element.src.match('')</p>
+    </div>
+    <!--标题结束-->
+    <!--内容开始-->
+    <div style="background-color: orange">
+        <h3>Date()</h3>
+        <p id="date">这是一个段落</p>
+        <button type="button" onclick="displayDate()">显示日期</button>
+    </div>
+    <div style="background-color: #64a5ff">
+        <h3>document.write()</h3>
+    </div>
+    <div style="background-color: #7d7f80">
+        <img id="myImage" onclick="changeImg()" src="./img/pic_bulboff.gif" alt="这是一只灯泡">
+        <p>点击开关</p>
+        <p>以上实例中代码 element.src.match("bulbon") 的作用意思是：检索 img 里面 src 属性的值有没有包含 bulbon 这个字符串</p>
+    </div>
+    <div style="background-color: #54ff41">
+        <p id="p_demo">JavaScript 能改变 HTML 元素的样式</p>
+        <button type="button" onclick="changeStyle()">改变样式</button>
+    </div>
+    <!--内容结束-->
 </body>
+<script>
+    document.write(Date());
+</script>
 </html>
