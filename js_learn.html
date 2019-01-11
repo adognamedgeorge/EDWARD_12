@@ -48,6 +48,8 @@
         <p>7. 一维数组的三种创建方式</p>
         <p>8. \反斜杠是一个转义字符。 转义字符将特殊字符转换为字符串字符</p>
         <p>9. getHours() || getMinutes || getSeconds</p>
+        <p>10. Math.random()</p>
+        <p>11. switch()</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -112,6 +114,16 @@
         <button type="button" onclick="handleMinutes()">getMinutes</button>
         <button type="button" onclick="handleSeconds()">getSeconds</button>
     </div>
+    <!--Math.random()返回介于 0（包含） ~ 1（不包含） 之间的一个随机数：-->
+    <div style="background-color: slategrey">
+        <p id="p_random">Math.random()返回介于 0（包含） ~ 1（不包含） 之间的一个随机数</p>
+        <button type="button" onclick="changeLink()">Change</button>
+    </div>
+    <!--switch-->
+    <div style="background-color: greenyellow">
+        <p id="p_switch">switch();getDay();default</p>
+        <button type="button" onclick="getDay()">获取日期</button>
+    </div>
     <!--内容结束-->
 <script>
     // 极大或极小的数字可以通过科学（指数）计数法来书写：
@@ -160,7 +172,7 @@
     //getHours || getSeconds || getMinutes
     function handleHours () {
         const hours = new Date().getHours();
-        document.getElementById('getHours').innerHTML = hours;
+        document.getElementById('getHours').innerHTML = hours.toString();
     };
     function handleMinutes () {
         const minutes = new Date().getMinutes();
@@ -169,6 +181,34 @@
     function handleSeconds () {
         const seconds = new Date().getSeconds();
         alert(seconds)
+    };
+    // Math.random()
+    function changeLink () {
+        const random = Math.random(),
+            pRandom = document.getElementById('p_random');
+        random > 0.5 ? pRandom.innerHTML = '<a href="https://daohang.qq.com/">导航</a>' : pRandom.innerHTML = '<a href="http://www.runoob.com/">菜鸟</a>'
+    };
+    //switch
+    function getDay () {
+        var x;
+        const pSwitch = document.getElementById('p_switch'),
+            day = new Date().getDay();
+            console.log(day)
+        switch (day) {
+            case 0: x = '周日';
+            break;
+            case 1: x = '周一';
+            break;
+            case 2: x = '周二';
+            break;
+            case 3: x = '周三';
+            break;
+            case 4: x = '周四';
+            break;
+            default:
+                x = '老子明天不上班！';
+        }
+        pSwitch.innerHTML = x;
     }
     // 输出时间
     document.write(Date());
