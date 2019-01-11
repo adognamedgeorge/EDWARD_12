@@ -13,47 +13,168 @@
         // element.src.match()
         function changeImg () {
             element = document.getElementById('myImage');
-            if (element.src.match('bulboff')) {
-                element.src = './img/pic_bulbon.gif'
-            } else {
-                element.src = './img/pic_bulboff.gif'
-            }
+            // if (element.src.match('bulboff')) {
+            //     element.src = './img/pic_bulbon.gif'
+            // } else {
+            //     element.src = './img/pic_bulboff.gif'
+            // }
+            element.src = element.src.match('bulboff') ? './img/pic_bulbon.gif' : './img/pic_bulboff.gif'
         };
+        // element.style.color
         function changeStyle () {
-            p_demo =document.getElementById('p_demo');
+            p_demo = document.getElementById('p_demo');
             p_demo.style.color = '#ff0000';
+        };
+        // isNaN(num)
+        function isNumber () {
+            const num = document.getElementById('input_number').value;
+            if (num == '' || isNaN(num)) {
+                alert ('不是数字')
+            } else {
+                alert ('是数字')
+            }
         }
     </script>
 </head>
 <body>
     <!--标题开始-->
-    <div style="background-color: pink">
+    <div style="background-color: pink; padding: 6px">
         <p>1. Date()</p>
         <p>2. document.write('')</p>
         <p>3. element.src.match('')</p>
+        <p>4. element.style.color</p>
+        <p>5. isNaN(x)</p>
+        <p>6. 科学指数e</p>
+        <p>7. 一维数组的三种创建方式</p>
+        <p>8. \反斜杠是一个转义字符。 转义字符将特殊字符转换为字符串字符</p>
+        <p>9. getHours() || getMinutes || getSeconds</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
+    <!--Date()-->
     <div style="background-color: orange">
         <h3>Date()</h3>
         <p id="date">这是一个段落</p>
         <button type="button" onclick="displayDate()">显示日期</button>
     </div>
+    <!--document.write()-->
     <div style="background-color: #64a5ff">
         <h3>document.write()</h3>
     </div>
+    <!--element.src.match-->
     <div style="background-color: #7d7f80">
         <img id="myImage" onclick="changeImg()" src="./img/pic_bulboff.gif" alt="这是一只灯泡">
         <p>点击开关</p>
         <p>以上实例中代码 element.src.match("bulbon") 的作用意思是：检索 img 里面 src 属性的值有没有包含 bulbon 这个字符串</p>
     </div>
+    <!--element.style.color-->
     <div style="background-color: #54ff41">
         <p id="p_demo">JavaScript 能改变 HTML 元素的样式</p>
         <button type="button" onclick="changeStyle()">改变样式</button>
     </div>
+    <!--isNaN(num)-->
+    <div style="background-color: orangered">
+        <p>请输入数字。如果输入值不是数字，浏览器会弹出提示框</p>
+        <input type="text" id="input_number">
+        <button type="button" onclick="isNumber()">验证数字</button>
+    </div>
+    <!--科学指数e-->
+    <div style="background-color: cornflowerblue">
+        <p id="p_e1">科学指数1</p>
+        <button type="button" onclick="handleE1()">科学计数</button>
+        <p id="p_e2">科学指数2</p>
+        <!--<button type="button" onclick="handelE1()">科学指数2</button>-->
+    </div>
+    <!--一维数组的三种创建方式-->
+    <div style="background-color: yellow">
+        <h3>1.先创建数组，再赋值</h3>
+        <h3>2.在创建数组对象的时候赋值condensed array([kənˈdɛnst]浓缩的；缩写的)</h3>
+        <h3>不创建对象，直接赋值literal array(literal[ˈlɪdərəl] 字面的；逐字的)</h3>
+    </div>
+    <!--反斜杠\-->
+    <div style="background-color: cadetblue">
+        <p id="back_slant1">back_slant1</p>
+        <p id="back_slant2">back_slant2</p>
+        <p class="back_slant3">back_slant3</p>
+        <p class="back_slant4">back_slant4</p>
+        <p class="back_slant5">back_slant5</p>
+        <p class="back_slant6">back_slant6</p>
+        <p class="back_slant7">back_slant7</p>
+        <p class="back_slant8">back_slant8</p>
+        <button type="button" onclick="backSlant()">反斜杠</button>
+    </div>
+    <!--getHours || getMinutes || getSeconds 该方法总是结合一个 Date 对象来使用new Date().getHours-->
+    <div style="background-color: indianred">
+        <p id="getHours">getHours</p>
+        <p id="getMinutes">getMinutes</p>
+        <p id="getSeconds">getSeconds</p>
+        <button type="button" onclick="handleHours()">getHours</button>
+        <button type="button" onclick="handleMinutes()">getMinutes</button>
+        <button type="button" onclick="handleSeconds()">getSeconds</button>
+    </div>
     <!--内容结束-->
-</body>
 <script>
+    // 极大或极小的数字可以通过科学（指数）计数法来书写：
+    function handleE1 () {
+        const pE1 = 123e6, pE2 = 123e-6;
+        p_e1 = document.getElementById('p_e1');
+        p_e2 = document.getElementById('p_e2');
+        p_e1.innerHTML = pE1;
+        p_e2.innerHTML = pE2;
+    };
+    // 一维数组的三种创建方式之一
+    var i;
+    var arr1 = new Array();
+    arr1[0] = 'apple';
+    arr1[1] = 'pear';
+    arr1[2] = 'peach';
+    for (i = 0 ; i < arr1.length; i++) {
+        document.write(arr1[i] + '<br>');
+    };
+    // 之二：在创建数组对象的时候赋值condensed array
+    const arr2 = new Array('苹果','香蕉','桃子','芒果');
+    document.write(arr2);
+    // 之三：不创建对象，直接赋值literal array
+    var arr3 = ['apple','西瓜','banana'];
+    document.write(arr3);
+    // 反斜杠back-slant
+    function backSlant () {
+        const slant1 = 'It\'s an apple ',
+            slant2 = " He is called \"Dog\" ",
+            slant3 = 'hhhhhh\\hh',
+            slant4 = 'bbbb\nnnnn',
+            slant5 = 'aaaa\rrrrr',
+            slant6 = 'bbb\ttttt',
+            slant7 = 'cccc\bbbb',
+            slant8 = 'ddd\fffff';
+        document.getElementById('back_slant1').innerHTML = slant1;
+        document.getElementById('back_slant2').innerHTML = slant2;
+        document.getElementsByClassName('back_slant4')[0].innerHTML = slant4;
+        document.getElementsByClassName('back_slant5')[0].innerHTML = slant5;
+        document.getElementsByClassName('back_slant6')[0].innerHTML = slant6;
+        document.getElementsByClassName('back_slant7')[0].innerHTML = slant7;
+        document.getElementsByClassName('back_slant8')[0].innerHTML = slant8;
+        const back_slant3 = document.getElementsByClassName('back_slant3')[0];
+        back_slant3.innerHTML= slant3;
+    };
+    //getHours || getSeconds || getMinutes
+    function handleHours () {
+        const hours = new Date().getHours();
+        document.getElementById('getHours').innerHTML = hours;
+    };
+    function handleMinutes () {
+        const minutes = new Date().getMinutes();
+        alert(minutes)
+    };
+    function handleSeconds () {
+        const seconds = new Date().getSeconds();
+        alert(seconds)
+    }
+    // 输出时间
     document.write(Date());
 </script>
+</body>
+<!--<script>-->
+    <!--document.write(Date());-->
+<!--</script>-->
 </html>
