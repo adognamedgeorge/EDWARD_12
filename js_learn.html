@@ -50,6 +50,15 @@
         <p>9. getHours() || getMinutes || getSeconds</p>
         <p>10. Math.random()</p>
         <p>11. switch()</p>
+        <p>12. while循环</p>
+        <p>13. do/while</p>
+        <p>14. 定义了数组后对数组进行赋值，中间如有某些下标未被使用（即未被赋值），
+            在遍历的时候，采用一般的 for 循环和 for...in 循环得到的结果不同。
+            for...in 循环会自动跳过那些没被赋值的元素，而 for 循环则不会，它会显示出 undefined。</p>
+        <p>15. break</p>
+        <p>16, continue</p>
+        <p>17. javaScript标签</p>
+        <p>18. null 和 undefined 的值相等，但类型不等</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -124,6 +133,40 @@
         <p id="p_switch">switch();getDay();default</p>
         <button type="button" onclick="getDay()">获取日期</button>
     </div>
+    <!--while循环-->
+    <div style="background-color: indianred">
+        <p id="p_while">只要指定条件为 true，循环就可以一直执行代码块。</p>
+        <button onclick="handleWhile()">while循环</button>
+    </div>
+    <!--do/while-->
+    <div style="background-color: deeppink">
+        <p id="do_while">do/while 循环是 while 循环的变体。该循环会在检查条件是否为真之前执行一次代码块，
+            然后如果条件为真的话，就会重复这个循环。
+            该循环至少会执行一次，即使条件为 false 它也会执行一次，因为代码块会在条件被测试前执行：</p>
+        <button onclick="doWhile()">do/while</button>
+        <p>while 和 do/while 的区别 : do/while至少会执行一遍</p>
+    </div>
+    <!--break-->
+    <div style="background-color: #7c8b22">
+        <p id="do_break">break 语句可用于跳出循环。break 语句跳出循环后，会继续执行该循环之后的代码（如果有的话）：</p>
+        <button onclick="doBreak()">break</button>
+    </div>
+    <!--continue-->
+    <div style="background-color: lightyellow">
+        <p id="do_continue">continue 语句中断循环中的迭代，如果出现了指定的条件，然后继续循环中的下一个迭代</p>
+        <button onclick="doContinue()">continue</button>
+    </div>
+    <!--javaScript标签-->
+    <div style="background-color: palevioletred">
+        <p id="p_label">有了标签，可以使用break和continue在多层循环的时候控制外层循环</p>
+        <button onclick="doLabel()">label</button>
+    </div>
+    <!--null && undefined-->
+    <div style="background-color: lightgreen">
+        <p>null 和 undefined 的值相等，但类型不等：</p>
+        <p id="null_undefined">null 和 undefined 的值相等，但类型不等</p>
+        <button onclick="doDifferent()">null&undefined</button>
+    </div>
     <!--内容结束-->
 <script>
     // 极大或极小的数字可以通过科学（指数）计数法来书写：
@@ -193,7 +236,7 @@
         var x;
         const pSwitch = document.getElementById('p_switch'),
             day = new Date().getDay();
-            console.log(day)
+            console.log(day);
         switch (day) {
             case 0: x = '周日';
             break;
@@ -209,6 +252,72 @@
                 x = '老子明天不上班！';
         }
         pSwitch.innerHTML = x;
+    };
+    // while
+    function handleWhile () {
+        var x = '', num = 0;
+        while(num < 5) {
+            num ++;
+            x += '这个数字是' + num + '<br>';
+        };
+        document.getElementById('p_while').innerHTML = x;
+    };
+    // do/while
+    function doWhile () {
+        var x = '', num = 0;
+        do {
+            num ++ ;
+            x += '这个数字是' + num + '<br>';
+        }
+        while (num < 5)
+        document.getElementById('do_while').innerHTML = x ;
+    };
+    // break
+    function doBreak () {
+        var x = '', num = 0;
+        for (; num < 10; num ++) {
+            if ( num == 3) break;
+            x += '数字为' + num + '<br>'
+        }
+        document.getElementById('do_break').innerHTML = x;
+    };
+    // continue
+    function doContinue () {
+        var x = '', num = 0;
+        for (; num < 10; num ++) {
+            if (num == 3) continue;
+            x += '数字为' + num + '<br>'
+        }
+        document.getElementById('do_continue').innerHTML = x;
+    };
+    // label
+    function doLabel () {
+        var str = '';
+        outerLoop:
+        for (var i = 0; i < 10; i ++) {
+            innerLoop:
+            for ( var j = 0; j < 9; j ++) {
+                if (j > 3) {
+                    break innerLoop
+                }
+                if ( i == 3) {
+                    break innerLoop
+                }
+                if ( i == 6) {
+                    break outerLoop
+                }
+            }
+           str += 'i:' + i + 'j:' + j + '<br>';
+        }
+        document.getElementById('p_label').innerHTML = str;
+    };
+    // undefined & null
+    function doDifferent () {
+        var x = 'undefined类型' + ' ' + typeof undefined + '<br>';
+        var y = 'null类型' + ' ' + typeof null + '<br>';
+        var z = 'null=== undefined' + ' ' + (null === undefined) + '<br>';
+        var w = 'null == undefined' + ' ' + (null == undefined);
+        document.getElementById('null_undefined').innerHTML = x + y + z + w;
     }
     // 输出时间
     document.write(Date());
