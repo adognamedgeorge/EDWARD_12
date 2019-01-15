@@ -59,6 +59,13 @@
         <p>16, continue</p>
         <p>17. javaScript标签</p>
         <p>18. null 和 undefined 的值相等，但类型不等</p>
+        <p>19. Number() 转换为数字， String() 转换为字符串， Boolean() 转化为布尔值。</p>
+        <p>20. javaScript中有5种数据类型：string || number || boolean || function || object</p>
+        <p>21. 3种对象类型：Object || Date || Array</p>
+        <p>22. 2个不包含任何值的数据类型：null || undefined</p>
+        <p>23. typeof 操作符</p>
+        <p>24. constructor 属性返回所有 JavaScript 变量的构造函数。</p>
+        <p>25. 正则Regular Expression || regex || regexp || RE</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -167,8 +174,81 @@
         <p id="null_undefined">null 和 undefined 的值相等，但类型不等</p>
         <button onclick="doDifferent()">null&undefined</button>
     </div>
+    <!--typeof-->
+    <div style="background-color: darkorange">
+        <p id="p_typeof">可以使用 typeof 操作符来查看 JavaScript 变量的数据类型。</p>
+        <button onclick="handleTypeof()">typeof</button>
+        <p>如果对象是 JavaScript Array 或 JavaScript Date ，我们就无法通过 typeof 来判断他们的类型，因为都是 返回 object。</p>
+    </div>
+    <!--constructor-->
+    <div style="background-color: mediumvioletred">
+        <p>可以使用 constructor 属性来查看对象是否为数组 (包含字符串 "Array"):</p>
+        <p>可以使用 constructor 属性来查看对象是否为日期 (包含字符串 "Date"):</p>
+        <p id="p_constructor">element.constructor</p>
+        <button onclick="handleConstructor()">constructor</button>
+    </div>
+    <!--Regular Expression-->
+    <div style="background-color: brown">
+        <p>使用单个字符串来描述、匹配一系列符合某个句法规则的字符串搜索模式</p>
+        <p>搜索模式可用于文本搜索和文本替换。</p>
+        <p>在 JavaScript 中，正则表达式通常用于两个字符串方法 : search() 和 replace()。</p>
+        <p>var patt = /runoob/i</p>
+        <p>/runoob/i 是一个正则表达式。runoob 是一个正则表达式主体 (用于检索)。i 是一个修饰符 (搜索不区分大小写)。</p>
+        <p id="p_search">search() 方法 用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串，并返回子串的起始位置。</p>
+        <p>search 方法可使用字符串作为参数。字符串参数会转换为正则表达式：</p>
+        <button onclick="handleSearch()">search</button>
+        <p id="p_replace">replace() 方法 用于在字符串中用一些字符替换另一些字符</p>
+        <p id="p_replace2">，或替换一个与正则表达式匹配的子串</p>
+        <button onclick="handleReplace()">replace</button>
+    </div>
     <!--内容结束-->
 <script>
+    // Regular Expression
+    function handleSearch() {
+        var str = 'hello World',
+            m = str.search('world'),
+            x = str.search('World'),
+            n = str.search(/world/i);
+        document.getElementById('p_search').innerHTML = String(m) + String(n) + String(x);//-1 6 6
+    };
+    function handleReplace () {
+        var str = document.getElementById('p_replace').innerHTML,
+            str2 = document.getElementById('p_replace2').innerHTML,
+            x = str2.replace(/替换/i, 'replace'),
+            m = str.replace('字符串','String');
+        document.getElementById('p_replace').innerHTML = m;
+        document.getElementById('p_replace2').innerHTML = x;
+    }
+    // typeof
+    function handleTypeof () {
+        document.getElementById('p_typeof').innerHTML =
+            "1. string: " + "typeof 'string'" + "=>" + typeof 'string' + '<br>' +
+            "2. number: " + "typeof 123" + "=>" + typeof 123 + '<br>' +
+            "3. boolean: " + "typeof false" + "=>" + typeof false + '<br>' +
+            "4. object: " + "typeof {'name': 'edward', 'age': 20}" + "=>" + typeof {'name': 'edward', 'age': 20} + '<br>' +
+            "5. function: " + "typeof function () {}" + "=>" + typeof function () {} + '<br>' +
+            "6. Date: " + "typeof new Date()" + "=>" + typeof new Date() + '<br>' +
+            "7. Array: " + "typeof [1,2,3,4]" + "=>" + typeof [1,2,3,4] + '<br>' +
+            "8. null: " + "typeof null" + "=>" + typeof null + '<br>' +
+            "9. undefined: " + "typeof myCar" + "=>" + typeof myCar + '<br>' +
+            "10. NaN: " + "typeof NaN" + "=>" + typeof NaN;
+    };
+    // constructor
+    function handleConstructor () {
+        document.getElementById('p_constructor').innerHTML =
+            "1. string.constructor: " + '=>' +  'string'.constructor + '<br>' +
+            '2. (3.14).constructor: ' + '=>' + (3.14).constructor + '<br>' +
+            '3. false.constructor:' + '=>' + false.constructor + '<br>' +
+            '4. [1,2,3].constructor' + '=>' + [1,2,3].constructor + '<br>' +
+            "5. {'name': 'edward', 'age': 30}" + '=>' + {'name': 'edward', 'age': 30}.constructor + '<br>' +
+            '6. new Date ().constructor' + '=>' + new Date().constructor + '<br>' +
+            '7. function () {}.constructor' + '=>' + function () {}.constructor + '<br>' +
+            // '8. null.constructor' + '=>' + null.constructor ;
+            // '9. NaN.constructor' + '=>' + NaN.constructor ;
+            // '10. undefined.constructor' + '=>' + myCar.constructor;
+            "8. array.constructor.toString().indexOf('Array')" + '=>' + [1.2,3].constructor.toString().indexOf('Array') + '<br>' +
+            "9. new Date().constructor.toString().indexOf('Date')" + '=>' + new Date().constructor.toString().indexOf('Date');
+    };
     // 极大或极小的数字可以通过科学（指数）计数法来书写：
     function handleE1 () {
         const pE1 = 123e6, pE2 = 123e-6;
