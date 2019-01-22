@@ -66,6 +66,10 @@
         <p>23. typeof 操作符</p>
         <p>24. constructor 属性返回所有 JavaScript 变量的构造函数。</p>
         <p>25. 正则Regular Expression || regex || regexp || RE</p>
+        <p>26. test()方法是一个正则表达式方法,返回布尔值</p>
+        <p>27. exec()  方法是一个正则表达式方法,返回数组</p>
+        <p>28. JS 判断输入字符串是否为数字、字母、下划线组成</p>
+        <p>29. 正则表达式表单验证实例：</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -201,8 +205,59 @@
         <p id="p_replace2">，或替换一个与正则表达式匹配的子串</p>
         <button onclick="handleReplace()">replace</button>
     </div>
+    <!--test()-->
+    <div style="background-color: darkslategrey">
+        <p id="p_test">test() 方法用于检测一个字符串是否匹配某个模式，如果字符串中含有匹配的文本，则返回 true，否则返回 false</p>
+        <p id="p_content2">content2</p>
+        <p id="p_content3">content3</p>
+        <p id="p_content4">content4</p>
+        <button type="button" onclick="handleTest()">test()</button>
+    </div>
+    <!--exec()-->
+    <div style="background-color: lightyellow">
+        <p>该函数返回一个数组，其中存放匹配的结果。如果未找到匹配，则返回值为 null</p>
+        <p id="p_exec">以下实例用于搜索字符串中的字母 "e":</p>
+        <p id="p_exec2">exec2</p>
+        <button onclick="handleExec()">exec</button>
+    </div>
+    <!--正则表达式表单验证实例：-->
+    <div style="background-color: purple">
+        <p id="p_decimal">是否带有小数</p>
+        <p>校验是否中文名称组成</p>
+        <p>校验是否全由8位数字组成 </p>
+        <p>校验电话码格式</p>
+        <p>校验邮件地址是否合法</p>
+        <button onclick="isDecimal()">isDecimal</button>
+    </div>
     <!--内容结束-->
 <script>
+    // 正则表达式表单验证实例：
+    // 是否带有小数
+    function isDecimal (decimal) {
+        var RegExp = /^\d+\.\d+$/;
+        return RegExp.test(decimal)
+    }
+    console.log(isDecimal(123));
+    console.log(isDecimal(123.1))
+    // exec()
+    function handleExec () {
+        document.getElementById('p_exec').innerHTML = /e/.exec('abcde eee'); //e
+        document.getElementById('p_exec2').innerHTML = /a/.exec('bbbccdd'); // 空白
+        console.log(/a/.exec('bbccdd')) //null
+    }
+    // test()
+    function handleTest () {
+        var patt1 = /money/,
+            content1 = patt1.test('I have a lot of money'),
+            content2 = patt1.test("You have lots of monkey"),
+            patt2 = new RegExp('monkey'),
+            content3 = patt2.test('I have lots of money'),
+            content4 = patt2.test('You have a lot of monkey');
+        document.getElementById('p_test').innerHTML = content1; //true
+        document.getElementById('p_content2').innerHTML = content2; //false
+        document.getElementById('p_content3').innerHTML = content3; // false
+        document.getElementById('p_content4').innerHTML = content4; // true
+    }
     // Regular Expression
     function handleSearch() {
         var str = 'hello World',
