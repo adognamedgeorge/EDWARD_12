@@ -70,6 +70,7 @@
         <p>27. exec()  方法是一个正则表达式方法,返回数组</p>
         <p>28. JS 判断输入字符串是否为数字、字母、下划线组成</p>
         <p>29. 正则表达式表单验证实例：</p>
+        <p>30. JavaScript 错误 - throw、try 和 catch</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -229,8 +230,28 @@
         <p>校验邮件地址是否合法</p>
         <button onclick="isDecimal()">isDecimal</button>
     </div>
+    <!--JavaScript 错误 - throw、try 和 catch-->
+    <div style="background-color: sandybrown">
+        <p>try 语句测试代码块的错误。</p>
+        <p>catch 语句处理错误。</p>
+        <p></p>
+        <input type="button" value="try&catch" onclick="handleTry()" />
+        <!--<button onclick="handleTry()">try&catch</button>-->
+    </div>
     <!--内容结束-->
 <script>
+    var text = '';
+    function handleTry () {
+        try {
+            addlert('Hello world')
+        }
+        catch(error) {
+            text = '本页有一个错误。\n\n';
+            text += '错误信息为:'+ error.message + '\n\n';
+            text += '点击确定继续。\n\n';
+            alert(text)
+        }
+    }
     // 正则表达式表单验证实例：
     // 是否带有小数
     function isDecimal (decimal) {
