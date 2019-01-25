@@ -71,6 +71,10 @@
         <p>28. JS 判断输入字符串是否为数字、字母、下划线组成</p>
         <p>29. 正则表达式表单验证实例：</p>
         <p>30. JavaScript 错误 - throw、try 和 catch</p>
+        <p>31. JavaScript 调试 - debugger</p>
+        <p>32. JavaScript 变量提升</p>
+        <p>33. JavaScript 严格模式(use strict)</p>
+        <p>34. JavaScript 使用误区</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -234,22 +238,76 @@
     <div style="background-color: sandybrown">
         <p>try 语句测试代码块的错误。</p>
         <p>catch 语句处理错误。</p>
-        <p></p>
         <input type="button" value="try&catch" onclick="handleTry()" />
         <!--<button onclick="handleTry()">try&catch</button>-->
     </div>
+    <div style="background-color: greenyellow">
+        <p>不管输入是否正确，输入框都会再输入后清空。</p>
+        <p>请输入 5 ~ 10 之间的数字：</p>
+        <p>finally 语句不论之前的 try 和 catch 中是否产生异常都会执行该代码块</p>
+        <input type="text" id="input_finally" />
+        <button type="button" onclick="handleFinally()">finally</button>
+        <p id="p_finally">finally</p>
+    </div>
+    <!--debugger-->
+    <div style="background-color: dimgrey">
+        <p>debugger 关键字用于停止执行 JavaScript，并调用调试函数。</p>
+        <p>这个关键字与在调试工具中设置断点的效果是一样的。</p>
+        <p>如果没有调试可用，debugger 语句将无法工作。</p>
+        <p id="p_debugger">开启 debugger ，代码在第三行前停止执行。</p>
+        <button type="button" onclick="handleDebugger()">debugger</button>
+    </div>
+    <!--use strict-->
+    <div style="background-color: mediumvioletred">
+        <p>严格模式通过在脚本或函数的头部添加 "use strict"; 表达式来声明。</p>
+        <p>严格模式下你不能使用未声明的变量。</p>
+        <p id="p_strict">浏览器按下 F12 开启调试模式，查看报错信息。</p>
+        <button type="button" onclick="handleStrict()">use strict</button>
+    </div>
     <!--内容结束-->
 <script>
+    // use strict
+    function handleStrict() {
+        "use strict";
+         xx = 123;
+        document.getElementById('p_strict').innerHTML = xx;
+    }
+    // debugger
+    function handleDebugger () {
+        var de = 10 * 10;
+        debugger;
+        document.getElementById('p_debugger').innerHTML = de ;
+    }
+    // finally
+    var x, y;
+    function handleFinally () {
+        x = document.getElementById('p_finally');
+        x.innerHTML = '';
+        y = document.getElementById('input_finally').value;
+        try {
+            if (y == '' ) throw '值为空';
+            if(isNaN(y)) throw '值不是数字';
+            if (y < 5) throw '太小';
+            if (y > 10) throw '太大';
+        }
+        catch(err) {
+            x.innerHTML = err
+        }
+        finally {
+            document.getElementById('input_finally').value = ''
+        }
+    }
+    // try&&catch
     var text = '';
     function handleTry () {
         try {
-            addlert('Hello world')
+            addlert('Hello world') //异常的抛出
         }
         catch(error) {
             text = '本页有一个错误。\n\n';
             text += '错误信息为:'+ error.message + '\n\n';
             text += '点击确定继续。\n\n';
-            alert(text)
+            alert(text) //异常的捕获与处理
         }
     }
     // 正则表达式表单验证实例：
