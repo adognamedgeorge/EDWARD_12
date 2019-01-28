@@ -75,6 +75,11 @@
         <p>32. JavaScript 变量提升</p>
         <p>33. JavaScript 严格模式(use strict)</p>
         <p>34. JavaScript 使用误区</p>
+        <p>35. JavaScript 表单验证</p>
+        <p>36. JavaScript 验证输入的数字</p>
+        <p>37. input属性：required="required"</p>
+        <p>38. HTML 约束验证</p>
+        <p>39. JavaScript this 关键字</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -264,8 +269,61 @@
         <p id="p_strict">浏览器按下 F12 开启调试模式，查看报错信息。</p>
         <button type="button" onclick="handleStrict()">use strict</button>
     </div>
+    <div style="background-color: lightgoldenrodyellow">
+        <p>在 JavaScript 中, null 用于对象, undefined 用于变量，属性和方法。</p>
+        <p>对象只有被定义才有可能为 null，否则为 undefined。</p>
+        <p></p>
+    </div>
+    <!--JavaScript 表单验证-->
+    <div style="background-color: darkred">
+        <form action="demo_form.php" name="edward_form" onsubmit="return validateForm()" method="post">
+            名字：<input type="text" name="edward_fname"/>
+            <input type="submit" value="提交"/>
+        </form>
+        <p id="p_validateForm">validateForm</p>
+    </div>
+    <!--JavaScript 验证输入的数字-->
+    <div style="background-color: rebeccapurple">
+        <p>请输入 1 到 10 之间的数字：</p>
+        <input id="input_num" />
+        <button type="button" onclick="handleNumber()">提交</button>
+        输入：<p id="p_submit"></p>
+    </div>
+    <!--如果表单字段 (fname) 的值为空, required 属性会阻止表单提交：-->
+    <div style="background-color: lightpink">
+        <p>如果表单字段 (fname) 的值为空, required 属性会阻止表单提交：</p>
+        <p>点击提交按钮，如果输入框是空的，浏览器会提示错误信息。</p>
+        <form action="demo_form.php" name="edward2_form" method="post">
+            名字：<input type="text" name="edward2_fname" required="required" />
+            <input type="submit" name="提交" />
+        </form>
+    </div>
+    <!--HTML 约束验证-->
+    <div>
+        <p>服务端数据验证是在数据提交到服务器上后再验证</p>
+        <p>客户端数据验证 side validation是在数据发送到服务器前，在浏览器上完成验证</p>
+        <p>HTML5 新增了 HTML 表单的验证方式：约束验证（constraint validation）</p>
+    </div>
     <!--内容结束-->
 <script>
+    // 验证输入的数字
+    function handleNumber () {
+        var x, text;
+        x = document.getElementById('input_num').value;
+        if( isNaN(x) || x <1 || x > 10) {
+            text = '错误'
+        } else {
+            text = '正确'
+        }
+        document.getElementById('p_submit').innerHTML = text;
+    }
+    // 表单验证
+    function validateForm () {
+        var x = document.forms["edward_form"]["edward_fname"].value;
+        if(x == null || x == '')
+            alert("请输入名字");
+            return false
+    }
     // use strict
     function handleStrict() {
         "use strict";
