@@ -80,6 +80,7 @@
         <p>37. input属性：required="required"</p>
         <p>38. HTML 约束验证</p>
         <p>39. JavaScript this 关键字</p>
+        <p>40. JavaScript let 和 const</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -299,13 +300,97 @@
         </form>
     </div>
     <!--HTML 约束验证-->
-    <div>
+    <div style="background-color: orangered">
         <p>服务端数据验证是在数据提交到服务器上后再验证</p>
         <p>客户端数据验证 side validation是在数据发送到服务器前，在浏览器上完成验证</p>
         <p>HTML5 新增了 HTML 表单的验证方式：约束验证（constraint validation）</p>
     </div>
+    <!--在方法中，this 表示该方法所属的对象。-->
+    <div style="background-color: dodgerblue">
+        <p id="p_this"></p>
+        <p>在对象方法中， this 指向调用它所在方法的对象。在上面一个实例中，this 表示 person 对象。</p>
+        <p>fullName 方法所属的对象就是 person。</p>
+        <p>实例中<b>this</b>指向<b>person</b>对象</p>
+    </div>
+    <!--单独使用 this，则它指向全局(Global)对象。-->
+    <div style="background-color: deepskyblue">
+        <p>单独使用 this，则它指向全局(Global)对象。</p>
+        <p>在浏览器中，window 就是该全局对象为 [object Window]:</p>
+        <p id="obj_window"></p>
+        <!--<button type="button" onclick="thisGlobal()">global</button>-->
+    </div>
+    <!--函数中使用this（默认）-->
+    <div style="background-color: darkorange">
+        <p id="objectWindow">在函数中，函数的所属者默认绑定到 this 上。在浏览器中，window 就是该全局对象为 [object Window]:</p>
+        <p>严格模式下函数是没有绑定到 this 上，这时候 this 是 undefined。</p>
+        <!--<button type="button" onclick="objectWindow()">object Window</button>-->
+    </div>
+    <!--在 HTML 事件句柄中，this 指向了接收事件的 HTML 元素：-->
+    <div style="background-color: saddlebrown">
+        <p>在 HTML 事件句柄中，this 指向了接收事件的 HTML 元素：</p>
+        <button type="button" onclick="this.style.display='none'">点击消失</button>
+        <button onclick="this.style.width='123px'">点击变长</button>
+    </div>
+    <!--对象方法中绑定-->
+    <div style="background-color: gold">
+        <p>对象方法中绑定</p>
+        <p id="objectObject"></p>
+    </div>
+    <!--显式函数绑定-->
+    <div style="background-color: silver">
+        <p>call()</p>
+        <p>在 JavaScript 中函数也是对象，对象则有方法，apply 和 call 就是函数对象的方法。
+            这两个方法异常强大，他们允许切换函数执行的上下文环境（context），即 this 绑定的对象。</p>
+        <p>在下面实例中，当我们使用 person2 作为参数来调用 person1.fullName 方法时,
+            this 将指向 person2, 即便它是 person1 的方法：</p>
+        <p id="p_call"></p>
+    </div>
     <!--内容结束-->
 <script>
+    // 显式函数绑定
+    var person3 = {
+        firstName: '楚',
+        lastName: '留香',
+        id: '123456'
+    };
+    var person4 = {
+        fullName3: function () {
+            return this.firstName + ' ' + this.lastName
+        }
+    };
+    document.getElementById('p_call').innerHTML = person4.fullName3.call(person3);
+    // 对象方法中绑定
+    var person2 = {
+        firstName: '西门',
+        lastName: '吹雪',
+        id: '12345',
+        fullName2: function () {
+            return this + this.id
+        }
+    }
+    document.getElementById('objectObject').innerHTML = person2.fullName2();//[object Object]12345
+    // 函数中使用this（默认）
+    // 严格模式下函数是没有绑定到 this 上，这时候 this 是 undefined。
+    function objectWindow () {
+        "use strict";
+        return this;
+    }
+    document.getElementById('objectWindow').innerHTML = objectWindow();
+        // 在浏览器中，window 就是该全局对象为 [object Window]:
+    // 严格模式下，如果单独使用，this 也是指向全局(Global)对象。
+        "use strict";
+        var xyz = this;
+        document.getElementById('obj_window').innerHTML = xyz;
+    // 在方法中，this 表示该方法所属的对象。
+    var person = {
+        firstName: 'Hu',
+        lastName: 'Edward',
+        id: '1234',
+        fullName: function () {
+            return this.firstName + ' ' + this.lastName;
+        }
+    };
+    document.getElementById('p_this').innerHTML = person.fullName();
     // 验证输入的数字
     function handleNumber () {
         var x, text;
