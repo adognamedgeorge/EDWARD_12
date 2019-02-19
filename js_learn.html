@@ -83,11 +83,13 @@
         <p>40. JavaScript let 和 const</p>
         <p>41. JavaScript JSON</p>
         <p>42. JavaScript void</p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
-        <p></p>
+        <p>43. JavaScript 函数定义</p>
+        <p>44. JavaScript 箭头函数</p>
+        <p>45. JavaScript 函数参数</p>
+        <p>46. JavaScript 函数调用</p>
+        <p>47. JavaScript 闭包</p>
+        <p>48. JS DOM HTML</p>
+        <p>49. JS DOM CSS</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -377,8 +379,104 @@
             如果你要定义一个死链接请使用 javascript:void(0)
         </p>
     </div>
+    <!--JavaScript 函数定义之函数是对象-->
+    <div style="background-color: fuchsia">
+        <p>在 JavaScript 中使用 typeof 操作符判断函数类型将返回 "function" 。
+            但是JavaScript 函数描述为一个对象更加准确。
+            JavaScript 函数有 属性 和 方法。</p>
+        <p>arguments.length属性返回函数调用过程接收到的参数个数</p>
+        <p id="p_arguments"></p>
+    </div>
+    <!--箭头函数-->
+    <div style="background-color: maroon">
+        <h3>箭头函数</h3>
+        <p>
+            ES6 新增了箭头函数。箭头函数表达式的语法比普通函数表达式更简洁。
+        </p>
+        <div>
+            <p>(参数1,参数2,…,参数N) => {函数声明}</p>
+            <p>(arg1,arg2,…,argN) => 表达式（单一）</p>
+            <p>相当于:(arg1,arg2,…,argN) => {return 表达式;}</p>
+            <h3>当只有一个参数时，圆括号是可选的：</h3>
+            <p>单一参数 => {函数声明}</p>
+            <p>(单一参数) => {函数声明}</p>
+            <b>没有参数的函数应该写成一对圆括号:</b>
+            <p>() => {函数声明}</p>
+        </div>
+        <p id="p_arrow"></p>
+        <p>
+            有的箭头函数都没有自己的 this。 不适合顶一个 对象的方法。
+
+            当我们使用箭头函数的时候，箭头函数会默认帮我们绑定外层 this 的值，所以在箭头函数中 this 的值和外层的 this 是一样的。
+
+            箭头函数是不能提升的，所以需要在使用之前定义。
+
+            使用 const 比使用 var 更安全，因为函数表达式始终是一个常量。
+
+            如果函数部分只是一个语句，则可以省略 return 关键字和大括号 {}，这样做是一个比较好的习惯:
+        </p>
+        <b>注意：IE11 及更早 IE 版本不支持箭头函数。</b>
+    </div>
+    <!--函数参数-->
+    <div style="background-color: Olive">
+        <b>Arguments对象</b>
+        <p>
+            JavaScript 函数有个内置的对象 arguments 对象。
+            argument 对象包含了函数调用的参数数组。
+        </p>
+        <b>通过这种方式你可以很方便的找到最大的一个参数的值：</b>
+        <p id="p_max">p_max</p>
+        <b>创建一个函数用来统计所有数值的和：</b>
+        <p id="p_sum">p_sum</p>
+    </div>
+    <!--JS DOM HTML && CSS-->
+    <div style="background-color: teal">
+        <p id="p_color">改变 HTML 属性</p>
+        <p id="p_fontFamily">document.getElementById(id).attribute = 新属性值</p>
+        <p id="p_fontSize">document.getElementById("image").src = "landscape.jpg"</p>
+        <b>改变HTML样式</b>
+        <p>document.getElementById(id).style.property = 新样式</p>
+        <p>
+            document.getElementById('p_color').style.color = "blue";
+            document.getElementById('p_fontFamily').style.fontFamily = "行楷";
+            document.getElementById('p_fontSize').style.fontSize = "larger";
+        </p>
+    </div>
     <!--内容结束-->
 <script>
+    // JS DOM HTML && CSS
+    document.getElementById('p_color').style.color = "blue";
+    document.getElementById('p_fontFamily').style.fontFamily = "行楷";
+    document.getElementById('p_fontSize').style.fontSize = "larger";
+    // Arguments对象
+    const data_max = findMax(1,2,3,4,5,6),
+            data_sum = findSum(1,2,3);
+    function findSum () {
+        var sum = 0;
+        for (var i = 0; i < arguments.length; i ++) {
+            sum += arguments[i];
+        }
+        return sum;
+    }
+    document.getElementById('p_sum').innerHTML = data_sum;
+    function findMax () {
+        var max = arguments[0];
+        if (arguments.length < 2) return max;
+        for (var i = 0; i < arguments.length; i ++) {
+            if (arguments[i] > max)
+                max = arguments[i]
+        }
+        return max
+    }
+    document.getElementById('p_max').innerHTML = data_max;
+    // 箭头函数
+    const dataX = (x,y) => x*y;
+    document.getElementById('p_arrow').innerHTML = dataX(10, 20);
+    // 函数是对象
+    function myArg (a,b) {
+        return arguments.length;
+    }
+    document.getElementById('p_arguments').innerHTML = myArg(2,3,3);//3
     // javascript:void(0);
     function getVoid () {
         var a, b, c, v;
