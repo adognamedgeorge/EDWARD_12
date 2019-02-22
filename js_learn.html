@@ -35,8 +35,21 @@
             }
         }
     </script>
+    <style>
+        .myDiv1, .myDiv2 {
+            width: 200px;
+            height: 200px;
+            border: 1px solid black;
+        }
+        .myDiv1 {
+            background-color: orange;
+        }
+        .myDiv2 {
+            background-color: red;
+        }
+    </style>
 </head>
-<body>
+<body onload="checkCookies()">
     <!--标题开始-->
     <div style="background-color: pink; padding: 6px">
         <p>1. Date()</p>
@@ -90,6 +103,10 @@
         <p>47. JavaScript 闭包</p>
         <p>48. JS DOM HTML</p>
         <p>49. JS DOM CSS</p>
+        <p>50. JavaScript HTML DOM 事件</p>
+        <p>51. JavaScript HTML DOM EventListener</p>
+        <p>52. JavaScript HTML DOM 元素 (节点)</p>
+        <p>53. JavaScript HTML DOM 集合(Collection)</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -442,8 +459,239 @@
             document.getElementById('p_fontSize').style.fontSize = "larger";
         </p>
     </div>
+    <!--JavaScript HTML DOM 事件-->
+    <div style="background-color: aqua">
+        <h3>onload和onunload事件</h3>
+        <b>navigator.cookieEnabled</b>
+        <p>
+            onload 和 onunload 事件会在用户进入或离开页面时被触发。
+            onload 事件可用于检测访问者的浏览器类型和浏览器版本，并基于这些信息来加载网页的正确版本。
+            onload 和 onunload 事件可用于处理 cookie。
+        </p>
+        <p></p>
+    </div>
+    <!--JavaScript HTML DOM EventListener-->
+    <div style="background-color: powderblue">
+        <h3>addEventListener</h3>
+        <b>element.addEventListener(event, function, useCapture)</b>
+        <p>
+            第一个参数是事件的类型 (如 "click" 或 "mousedown").
+
+            第二个参数是事件触发后调用的函数。
+
+            第三个参数是个布尔值用于描述事件是冒泡还是捕获。该参数是可选的。
+        </p>
+        <b>注意:不要使用 "on" 前缀。 例如，使用 "click" ,而不是使用 "onclick"。</b>
+        <p id="p_event"></p>
+        <button type="button" id="btnEvent">addEventListener</button>
+        <p></p>
+    </div>
+    <!--向同一个元素中添加多个事件句柄-->
+    <div style="background-color: aquamarine">
+        <h3>向同一个元素中添加多个事件句柄</h3>
+        <b>addEventListener() 方法允许向同一个元素添加多个事件，且不会覆盖已存在的事件：</b>
+        <p>该实例使用 addEventListener() 方法向同个按钮中添加两个点击事件</p>
+        <button type="button" id="btnEs">一个按钮两个点击事件</button>
+        <b>你可以向同个元素添加不同类型的事件：</b>
+        <button id="btnTs">一个按钮多个不同类型事件</button>
+        <p id="p_btnTs"></p>
+        <h3>向 Window 对象添加事件句柄</h3>
+        <p>addEventListener() 方法允许你在 HTML DOM 对象添加事件监听</p>
+        <p>HTML DOM 对象如： HTML 元素, HTML 文档, window 对象。或者其他支出的事件对象如: xmlHttpRequest 对象</p>
+        <p id="xmlHttpRequest">当用户重置窗口大小时添加事件监听：</p>
+        <b>传递参数</b>
+        <p id="pParam">当传递参数值时，使用"匿名函数"调用带参数的函数：</p>
+        <button id="btnParam">函数参数</button>
+    </div>
+    <!--事件冒泡或事件捕获？-->
+    <div style="background-color: chartreuse">
+        <h3>事件冒泡或事件捕获？</h3>
+        <p>事件传递有两种方式：冒泡与捕获。</p>
+        <p>事件传递定义了元素事件触发的顺序。 如果你将p元素插入到 div 元素中，用户点击p元素, 哪个元素的 "click" 事件先被触发呢？</p>
+        <p> 冒泡 中，内部元素的事件会先被触发，然后再触发外部元素，即：p 元素的点击事件先触发，然后会触发 div元素的点击事件。</p>
+        <p>在 捕获 中，外部元素的事件会先被触发，然后才会触发内部元素的事件，即：div元素的点击事件先触发 ，然后再触发p元素的点击事件。</p>
+        <b>addEventListener() 方法可以指定 "useCapture" 参数来设置传递类型：</b>
+        <p>默认值为 false, 即冒泡传递，当值为 true 时, 事件使用捕获传递。</p>
+        <b>element.addEventListener(event, function, useCapture)</b>
+        <b>默认值为false，即冒泡传递；当值为true时，事件使用捕获传递</b>
+        <div class="myDiv1">
+            <p class="myP1">这是第一个段落</p>
+        </div>
+        <div class="myDiv2">
+            <p class="myP2">这是第二个段落</p>
+        </div>
+    </div>
+    <!--removeEventListener() 方法-->
+    <div style="background-color: chocolate">
+        <h3>removeEventListener() 方法</h3>
+        <p>removeEventListener() 方法移除由 addEventListener() 方法添加的事件句柄:</p>
+        <div class="divOnmousemove" style="background-color: coral; padding: 50px;">div 元素添加了 onmousemove 事件句柄，鼠标在桔红色的框内移动时会显示随机数。
+            <p>点击按钮移除 DIV 的事件句柄。</p>
+            <button onclick="removeMove()">点击移除</button>
+        </div>
+        <p class="pContent"></p>
+    </div>
+    <!--跨浏览器解决方法:-->
+    <div style="background-color: darkgoldenrod">
+        <h3>跨浏览器解决方法:</h3>
+        <p>IE 8 及更早 IE 版本，Opera 7.0及其更早版本不支持 addEventListener() 和 removeEventListener() 方法</p>
+        <p>但是，对于这类浏览器版本可以使用 detachEvent() 方法来移除事件句柄:</p>
+        <b>element.attachEvent(event, function)</b><br>
+        <b>element.detachEvent(event, function)</b>
+        <button id="btnAtt">attachEvent</button>
+    </div>
+    <!--JavaScript HTML DOM 元素 (节点)-->
+    <div id="apChild" style="background-color: crimson">
+        <h3>JavaScript HTML DOM 元素 (节点)</h3>
+        <b>创建新的 HTML 元素 (节点) - appendChild()</b>
+        <p> appendChild() 方法，它用于添加新元素到尾部。</p>
+    </div>
+    <!--创建新的 HTML 元素 (节点) - insertBefore()-->
+    <div id="insertBefore" style="background-color: forestgreen">
+        <h3 class="hInsert">创建新的 HTML 元素 (节点) - insertBefore()</h3>
+        <b>如果我们需要将新元素添加到开始位置，可以使用 insertBefore() 方法:</b>
+    </div>
+    <!--移除已存在的元素removeChild()-->
+    <div id="divParent" style="background-color: mediumspringgreen">
+        <h3>移除已存在的元素removeChild()</h3>
+        <p class="pChild2">要移除一个元素，你需要知道该元素的父元素。</p>
+        <p class="pChild">复制：要移除一个元素，你需要知道该元素的父元素。</p>
+        <b>注意：早期的 Internet Explorer 浏览器不支持 node.remove() 方法。</b>
+        <p>以下代码是已知要查找的子元素，然后查找其父元素，再删除这个子元素（删除节点必须知道父节点）：</p>
+        <p>
+            var child = document.getElementById("p1");
+            child.parentNode.removeChild(child);
+        </p>
+    </div>
+    <!--替换 HTML 元素 - replaceChild()-->
+    <div id="replaceChild" style="background-color: deepskyblue">
+        <h3>替换 HTML 元素 - replaceChild(para1, para2)</h3>
+        <p class="pRep">段落1</p>
+        <p class="pChi">段落2</p>
+    </div>
     <!--内容结束-->
 <script>
+    // 替换 HTML 元素 - replaceChild()
+    const rC = document.getElementById('replaceChild'),
+        pR = document.getElementsByClassName('pRep')[0],
+        pChi = document.getElementsByClassName('pChi')[0],
+        bNew = document.createElement('b'),
+        bText = document.createTextNode('新的b元素');
+    bNew.appendChild(bText);
+    rC.replaceChild(bNew, pR);
+    // 移除已存在的元素removeChild()
+    const dP = document.getElementById('divParent'),
+        pC = document.getElementsByClassName('pChild')[0],
+        pC2 = document.getElementsByClassName('pChild2')[0];
+    pC2.addEventListener('click', removeC);
+    function removeC (e) {
+        dP.removeChild(pC);
+        e.stopPropagation();
+    }
+    // 创建新的 HTML 元素 (节点) - insertBefore()
+    const para2 = document.createElement('h2'),
+        node2 = document.createTextNode('这是一个insertBefore()插入的新标题'),
+        hInsert = document.getElementsByClassName('hInsert')[0],
+        insertB = document.getElementById('insertBefore');
+    para2.appendChild(node2);
+    insertB.insertBefore(para2, hInsert);
+    // 创建新的 HTML 元素 (节点) - appendChild()
+    const apChild = document.getElementById('apChild'),
+        para = document.createElement('p'),
+        node = document.createTextNode('这是一个createTextNode()创建的新段落');
+    para.appendChild(node);
+    apChild.appendChild(para);
+    // addEventListener兼容性
+    const btnAtt = document.getElementById('btnAtt');
+    function attachEvent () {
+        alert('兼容性attachEvent&&detachEvent')
+    }
+    if (btnAtt.addEventListener) {
+        btnAtt.addEventListener('click', attachEvent)
+    } else {
+        btnAtt.attachEvent('onclick', attachEvent)
+    }
+    // removeEventListener() 方法
+    const divOn = document.getElementsByClassName('divOnmousemove')[0],
+        pContent = document.getElementsByClassName('pContent')[0];
+    divOn.addEventListener('mousemove', addMove);
+    function addMove () {
+        pContent.innerHTML = Math.random()
+    }
+    function removeMove () {
+        divOn.removeEventListener('mousemove', addMove)
+    }
+    // 事件冒泡或事件捕获？
+    const Div1 = document.getElementsByClassName('myDiv1')[0],
+        Div2 = document.getElementsByClassName('myDiv2')[0],
+        P1 = document.getElementsByClassName('myP1')[0],
+        P2 = document.getElementsByClassName('myP2')[0];
+    Div1.addEventListener('click', function () {
+        alert('myDiv1 clicked')
+    }, false);
+    P1.addEventListener('click', function (e) {
+        alert('myP1 clicked');
+        e.preventDefault();//阻止默认事件
+        e.stopPropagation();//阻止冒泡事件
+    }, false);
+    Div2.addEventListener('click', function () {
+        alert('myDiv2 clicked')
+    }, true);
+    P2.addEventListener('click', function () {
+        alert('myP2 clicked')
+    }, true);
+    // 当传递参数值时，使用"匿名函数"调用带参数的函数：
+    function sixFun (a, b) {
+        return a*b
+    }
+    const p1 = 2,
+            p2 = 3,
+            btnParam = document.getElementById('btnParam');
+    btnParam.addEventListener('click', function () {
+        document.getElementById('pParam').innerHTML = sixFun (p1, p2)
+    });
+    // 当用户重置窗口大小时添加事件监听：
+    window.addEventListener('resize', function () {
+        xhr.innerHTML = Math.random()
+    });
+    // 向同一个元素中添加多个事件句柄
+    var btnEs = document.getElementById('btnEs'),
+        btnTs = document.getElementById('btnTs'),
+        pbtnTs = document.getElementById('p_btnTs'),
+        xhr = document.getElementById('xmlHttpRequest');
+    btnEs.addEventListener('click', myFirFun);
+    btnEs.addEventListener('click', mySecFun);
+    function myFirFun () {
+        alert ('第一个事件')
+    }
+    function mySecFun () {
+        alert('第二个事件')
+    }
+    function thirFun () {
+        pbtnTs.innerHTML += "onmouseover<br>"
+    }
+    function forthFun () {
+        pbtnTs.innerHTML += "onclick<br>"
+    }
+    function fifthFun () {
+        pbtnTs.innerHTML += "onmouseout<br>"
+    }
+    btnTs.addEventListener('mouseover', thirFun);
+    btnTs.addEventListener("click", forthFun);
+    btnTs.addEventListener("mouseout", fifthFun);
+    // addEventListener
+    function displayDate () {
+        document.getElementById('p_event').innerHTML = Date();
+    }
+    document.getElementById('btnEvent').addEventListener('click',displayDate);
+    // onload && onunload事件
+    function checkCookies () {
+        if (navigator.cookieEnabled == true) {
+            alert('Cookies 可用')
+        } else {
+            alert('Cookies 不可用')
+        }
+    }
     // JS DOM HTML && CSS
     document.getElementById('p_color').style.color = "blue";
     document.getElementById('p_fontFamily').style.fontFamily = "行楷";
