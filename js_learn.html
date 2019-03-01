@@ -47,6 +47,40 @@
         .myDiv2 {
             background-color: red;
         }
+        .btnn {
+            background: #1AAB8A;
+            color: #fff;
+            border: none;
+            position: relative;
+            height: 60px;
+            font-size: 1.6em;
+            padding: 0 2em;
+            transition: 800ms ease all;
+            outline: none;
+        }
+        .btnn::before, .btnn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 2px;
+            width: 0;
+            background: #ab5e22;
+            transition: 400ms ease all;
+        }
+        .btnn:hover:before, .btnn:hover:after {
+            width: 100%;
+            transition: 800ms ease all;
+        }
+        .btnn::after {
+            right: inherit;
+            top: inherit;
+            left: 0;
+            bottom: 0;
+        }
+        .btnn:hover {
+            background-color: transparent;
+        }
     </style>
 </head>
 <body onload="checkCookies()">
@@ -107,6 +141,7 @@
         <p>51. JavaScript HTML DOM EventListener</p>
         <p>52. JavaScript HTML DOM 元素 (节点)</p>
         <p>53. JavaScript HTML DOM 集合(Collection)</p>
+        <p>54. JavaScript 对象</p>
     </div>
     <!--标题结束-->
     <!--内容开始-->
@@ -569,8 +604,110 @@
         <p class="pRep">段落1</p>
         <p class="pChi">段落2</p>
     </div>
+    <div id="divv" style="width: 100px;height: 100px; border: 1px solid black;">
+        <button class="btnn">123</button>
+    </div>
+    <!--JavaScript HTML DOM 集合(Collection)-->
+    <div style="background-color: sandybrown;">
+        <p>getElementsByTagName() 方法返回 HTMLCollection 对象。</p>
+        <p id="p_collection"></p>
+        <p>HTMLCollection 对象 length 属性<span id="spanLength"></span></p>
+        <b>修改所有 <p> 元素的背景颜色:</b>
+        <p>
+            HTMLCollection 不是一个数组！
+
+            HTMLCollection 看起来可能是一个数组，但其实不是。
+
+            你可以像数组一样，使用索引来获取元素。
+
+            HTMLCollection 无法使用数组的方法： valueOf(), pop(), push(), 或 join() 。
+        </p>
+    </div>
+    <!--JavaScript HTML DOM 节点列表-->
+    <div style="background-color: magenta">
+        <h3>JavaScript HTML DOM 节点列表NodeList</h3>
+        <p>NodeList 对象是一个从文档中获取的节点列表 (集合) 。</p>
+        <p>
+            一些旧版本浏览器中的方法（如：getElementsByClassName()）返回的是 NodeList 对象，而不是 HTMLCollection 对象。
+
+            所有浏览器的 childNodes 属性返回的是 NodeList 对象。
+
+            大部分浏览器的 querySelectorAll() 返回 NodeList 对象。
+        </p>
+        <p id="pNodelist"></p>
+        <p id="pLength"></p>
+        <h3>HTMLCollection 与 NodeList 的区别</h3>
+        <p>
+            HTMLCollection 是 HTML 元素的集合。NodeList 是一个文档节点的集合。
+            NodeList 与 HTMLCollection 有很多类似的地方。
+            NodeList 与 HTMLCollection 都与数组对象有点类似，可以使用索引 (0, 1, 2, 3, 4, ...) 来获取元素。
+            NodeList 与 HTMLCollection 都有 length 属性。HTMLCollection 元素可以通过 name，id 或索引来获取。
+            NodeList 只能通过索引来获取。只有 NodeList 对象有包含属性节点和文本节点。
+        </p>
+    </div>
+    <!--JavaScript 对象-->
+    <div style="background-color: khaki">
+        <h3>JavaScript 对象</h3>
+        <p>JavaScript 中的所有事物都是对象：字符串、数值、数组、函数...</p>
+        <p>此外，JavaScript 允许自定义对象。</p>
+        <p>JavaScript 提供多个内建对象，比如 String、Date、Array 等等。 对象只是带有属性和方法的特殊数据类型。</p>
+        <b>对象只是一种特殊的数据。对象拥有属性和方法。</b>
+        <h3>访问对象的属性 objectName.propertyName; 例:object.length</h3>
+        <h3>访问对象的方法;方法是能够在对象上执行的动作。objectName.methodName();例:object.toUpperCase()</h3>
+        <h4>创建 JavaScript 对象</h4>
+        <ul>
+            <b>创建新对象有两种不同的方法：</b>
+            <li>定义并创建对象的实例</li>
+            <li>使用函数来定义对象，然后创建新的对象实例</li>
+        </ul>
+        <b>这个例子创建了对象的一个新实例，并向其添加了四个属性：</b>
+        <div id="dObject"></div>
+        <b>替代语法（使用对象 literals字面量）：</b>
+        <div class="dLiteral"></div>
+    </div>
+    <!--使用对象构造器-->
+    <div>
+        <h3>使用对象构造器</h3>
+        <p class="pConstructor"></p>
+    </div>
     <!--内容结束-->
 <script>
+    // 使用对象构造器
+    function person3 (a,b,c,d) {
+        this.fN = a;
+        this.lN = b;
+        this.age = c;
+        this.eyeColor = d;
+    }
+    person4 = new person3 ('风','清扬', '50', 'black'); //const person4 error
+    document.getElementsByClassName('pConstructor')[0].innerHTML = person4.fN + person4.lN + ' is ' +
+                                                                   person4.age + ' years old' + ' with ' +
+                                                                    person4.eyeColor + 'eyes';
+    // 替代语法（使用对象 literals字面量）
+    person2 = {fN: '东方', lN: '不败', age: 25};
+    const dLiteral = document.getElementsByClassName('dLiteral')[0];
+    dLiteral.innerHTML = person2.fN + person2.lN + ' is ' + person2.age + ' years old';
+    // 这个例子创建了对象的一个新实例，并向其添加了四个属性
+    var person = new Object();
+    person.firstName = '西门';
+    person.lastName = '吹雪';
+    person.age = 26;
+    person.weapon = 'sword';
+    document.getElementById('dObject').innerHTML = person.firstName + person.lastName + 'is' + person.age + 'years old';
+    // JavaScript HTML DOM 节点列表NodeList
+    var nodeList = document.querySelectorAll('h3');
+    document.getElementById('pNodelist').innerHTML = "标题内容为: <span style='color: brown;'>" + nodeList[2].innerHTML + '</span>';
+    document.getElementById('pLength').innerHTML =  nodeList.length;
+    for (var i = 0; i < nodeList.length; i ++) {
+        nodeList[i].style.backgroundColor = 'yellow';
+    }
+    // JavaScript HTML DOM 集合(Collection)
+    var myCollection = document.getElementsByTagName('p');
+    document.getElementById('p_collection').innerHTML = "段落内容为: <span style='color: red;'>" + myCollection[17].innerHTML + '</span>';
+    document.getElementById('spanLength').innerHTML = myCollection.length;
+    for (var i = 0; i < myCollection.length; i ++ ) {
+        myCollection[i].style.backgroundColor = 'tan'
+    }
     // 替换 HTML 元素 - replaceChild()
     const rC = document.getElementById('replaceChild'),
         pR = document.getElementsByClassName('pRep')[0],
